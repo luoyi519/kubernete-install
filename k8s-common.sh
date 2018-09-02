@@ -77,10 +77,10 @@ update_host(){
         else
             passwd=${key}
 
-            sudo echo "Register IP: ${internalIP},hostname: k8s_${host} in hosts"
+            sudo echo "Register IP: ${internalIP},hostname: k8s_${host},index: $i in hosts"
             sudo echo "${internalIP} k8s_${host}" >> /etc/hosts
 
-            if [[ $i < 5 ]]; then
+            if [ $i -lt 5 ]; then
                 MASTER_IP=${internalIP}
 
                 if [ "${CERT_MODE}" == "simple" ]; then
@@ -97,7 +97,7 @@ update_host(){
             do
                 if [ "${internalIP}" == "$key" ];then
                     NODE_IP=${internalIP}
-                    echo "########## verify current node ip success: ${MASTER_IP}"
+                    echo "########## verify current node ip success: ${NODE_IP}"
                 fi
             done
         fi
